@@ -41,8 +41,8 @@ export class HomePage {
     })
 
     this.weatherProv.getWeather(this.location.city, this.location.state, 'br')
-      .subscribe(res => {
-        this.weather = res;
+      .subscribe(wea => {
+        this.weather = wea;
       });
 
   }
