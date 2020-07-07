@@ -4,22 +4,39 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="setting" padding>
   <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h3 class="title">Get my location by</h3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button ion-button block>
+          Geolocation
+        </button>
+      </ion-col>
+    </ion-row>
     <ion-row>
       <ion-col>
         <ion-list>
           <form (ngSubmit)="saveForm()">
             <ion-item>
-              <ion-label>City: </ion-label>
-              <ion-input [(ngModel)]="city" [ngModelOptions]="{standalone: true}"></ion-input>
+              <ion-label>State: </ion-label>
+              <ion-select [(ngModel)]="state" [ngModelOptions]="{standalone: true}" (ngModelChange)="selectChange()">
+                <ion-option *ngFor="let item of ufs" value="{{item.sigla}}">{{item.nome}}</ion-option>
+              </ion-select>
             </ion-item>
             <ion-item>
-              <ion-label>State: </ion-label>
-              <ion-input [(ngModel)]="state" [ngModelOptions]="{standalone: true}"></ion-input>
+              <ion-label>City: </ion-label>
+              <ion-select [(ngModel)]="city" [ngModelOptions]="{standalone: true}">
+                <ion-option *ngFor="let item of citys" value="{{item.nome}}">{{item.nome}}</ion-option>
+              </ion-select>
             </ion-item>
-            <button type='submit' ion-button block>Save</button>
+            <button type='submit' ion-button block>Search</button>
           </form>
+
         </ion-list>
       </ion-col>
     </ion-row>

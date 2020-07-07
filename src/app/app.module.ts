@@ -12,8 +12,13 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { WeatherApiProvider } from '../providers/weather-api/weather-api';
 
+
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
+import { Geolocation } from '@ionic-native/geolocation';
+import { GeolocationMock} from '../mock/geolocation.mock';
+import { LocationApiProvider } from '../providers/location-api/location-api';
+
 
 @NgModule({
   declarations: [
@@ -41,7 +46,10 @@ import { IonicStorageModule } from '@ionic/storage';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    WeatherApiProvider
+    WeatherApiProvider,
+    {provide: Geolocation, useClass: GeolocationMock},
+    LocationApiProvider
+
   ]
 })
 export class AppModule {}
