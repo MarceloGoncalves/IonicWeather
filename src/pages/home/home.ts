@@ -22,7 +22,13 @@ export class HomePage {
     private storage: Storage) {
   }
 
-  async ionViewCanEnter() {
+ 
+
+  ionViewDidEnter(){
+    this.getWeather();
+  }
+
+  private async getWeather(){
     await this.storage.get('location').then((val) => {
       if (val != null) {
         this.location = JSON.parse(val);
@@ -37,8 +43,8 @@ export class HomePage {
     this.weatherProv.getWeather(this.location.city, this.location.state, 'br')
       .subscribe(res => {
         this.weather = res;
-        console.log(this.weather);
       });
+
   }
 
 

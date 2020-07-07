@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Storage } from '@ionic/storage';
-import { HomePage } from '../home/home';
+//import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
@@ -39,7 +39,8 @@ export class SettingPage {
       state: this.state
     }
     this.storage.set('location', JSON.stringify(location));
-    this.navCtrl.push(HomePage);
+    this.navCtrl.parent.select(0);
+    
   }
 
 
