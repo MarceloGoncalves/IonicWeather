@@ -1,16 +1,19 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Tempo</ion-title>
+    <ion-title>Weather</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding class='home'>
+
+  <ion-spinner *ngIf="!weather" name='bubbles'></ion-spinner>
+
   <ion-grid *ngIf="weather">
     <ion-row>
-      <ion-col offset-25>
+      <ion-col>
         <h2 class="location">{{weather.name}}</h2>
         <div class="icon"><img src="http://openweathermap.org/img/w/{{weather.weather[0].icon}}.png"></div>
-        <h3 class="desc">{{weather.weather[0].description}}</h3>
+        <h3 class="desc">{{weather.weather[0].description | description}} </h3>
         <h1 class="temp">{{weather.main.temp}}&deg;</h1>
       </ion-col>
     </ion-row>
@@ -30,5 +33,4 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  
 </ion-content>

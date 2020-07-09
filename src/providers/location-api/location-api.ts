@@ -9,7 +9,6 @@ export class LocationApiProvider {
 
   constructor(public http: HttpClient) {
     this.url = "https://servicodados.ibge.gov.br/api/v1/localidades/estados";
-
   }
 
   getUF(){

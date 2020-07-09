@@ -13,7 +13,7 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <button ion-button block>
+        <button ion-button block (click)="getGeolocation()">
           Geolocation
         </button>
       </ion-col>
@@ -28,7 +28,7 @@
                 <ion-option *ngFor="let item of ufs" value="{{item.sigla}}">{{item.nome}}</ion-option>
               </ion-select>
             </ion-item>
-            <ion-item>
+            <ion-item *ngIf="citys">
               <ion-label>City: </ion-label>
               <ion-select [(ngModel)]="city" [ngModelOptions]="{standalone: true}">
                 <ion-option *ngFor="let item of citys" value="{{item.nome}}">{{item.nome}}</ion-option>

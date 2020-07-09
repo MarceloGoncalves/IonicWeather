@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 
 import { WeatherApiProvider } from '../../providers/weather-api/weather-api';
 import { Storage } from '@ionic/storage';
+import { AlertController } from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
@@ -13,40 +14,70 @@ export class HomePage {
   location: {
     city: String,
     state: String,
+    lat: String,
+    log: String,
+    geolocation: boolean
   }
 
 
   constructor(
     public navCtrl: NavController,
     private weatherProv: WeatherApiProvider,
-    private storage: Storage) {
+    private storage: Storage,
+    private alertCtrl: AlertController) {
   }
 
- 
-
-  ionViewDidEnter(){
+  ionViewDidEnter() {
     this.getWeather();
   }
 
-  private async getWeather(){
+
+  private async getWeather() {
     await this.storage.get('location').then((val) => {
       if (val != null) {
         this.location = JSON.parse(val);
-      } else {
-        this.location = {
-          city: 'quixada',
-          state: 'ce'
+        console.log(location);
+        if (this.location.geolocation == false) {
+          console.log("geolocation false");
+          this.weatherProv.getWeather(this.location.city, this.location.state, 'br')
+            .subscribe(wea => {
+              this.weather = wea;
+            },
+              (err) => {
+                console.log(err.error)
+                this.alertLocationNotFound();
+              });
+        } else {
+          console.log("geolocation true");
+          this.location = JSON.parse(val);
+          this.weatherProv.getWeatherGeol(this.location.lat, this.location.log)
+            .subscribe(wea => {
+              this.weather = wea;
+            },
+              (err) => {
+                console.log(err.error)
+                this.alertLocationNotFound();
+              });
         }
+      } else {
+        this.alertLocationNotFound();
       }
     })
-
-    this.weatherProv.getWeather(this.location.city, this.location.state, 'br')
-      .subscribe(wea => {
-        this.weather = wea;
-      });
-
   }
 
-
-
+  alertLocationNotFound() {
+    let alert = this.alertCtrl.create({
+      title: 'Location not found',
+      message: 'plase configure your location',
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            this.navCtrl.parent.select(2);
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
 }

@@ -1,8 +1,8 @@
 import { Geolocation, Geoposition } from '@ionic-native/geolocation';
 
 export class GeolocationMock extends Geolocation {
-    latitude = 1;
-    longitude = 1;
+    latitude = -4.97139;
+    longitude = -39.01528;
 
 
     getCurrentPosition(options) {

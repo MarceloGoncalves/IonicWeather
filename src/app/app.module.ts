@@ -18,6 +18,8 @@ import { IonicStorageModule } from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation';
 import { GeolocationMock} from '../mock/geolocation.mock';
 import { LocationApiProvider } from '../providers/location-api/location-api';
+import { DescriptionPipe } from '../pipes/description/description';
+
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import { LocationApiProvider } from '../providers/location-api/location-api';
     AboutPage,
     SettingPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    DescriptionPipe
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,8 @@ import { LocationApiProvider } from '../providers/location-api/location-api';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     WeatherApiProvider,
-    {provide: Geolocation, useClass: GeolocationMock},
+  //  Geolocation,
+   {provide: Geolocation, useClass: GeolocationMock},
     LocationApiProvider
 
   ]
