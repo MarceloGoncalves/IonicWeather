@@ -20,56 +20,60 @@ export class HomePage {
     geolocation: boolean
   }
 
+  private lang: string;
+
 
   constructor(
     public navCtrl: NavController,
     private weatherProv: WeatherApiProvider,
     private storage: Storage,
     private alertCtrl: AlertController,
-    public translateService:TranslateService) {
+    public translateService: TranslateService) {
   }
+
+
 
   ionViewDidEnter() {
+    this.getLanguage();
     this.getWeather();
-    this.getLinguage();
   }
 
-  private async getLinguage(){
-    await this.storage.get('language').then((res) =>{
-      if(res != null){
+  private async getLanguage() {
+    await this.storage.get('language').then((res) => {
+      console.log(res)
+      if (res != null) {
         this.translateService.setDefaultLang(res);
+        (res == 'br') ? this.lang = 'pt_br' : this.lang = 'en';
       }
-      else{
+      else {
         this.translateService.setDefaultLang('br');
+        this.lang = 'pt_br';
       }
     })
+
   }
 
 
   private async getWeather() {
+    this.getLanguage();
     await this.storage.get('location').then((val) => {
       if (val != null) {
         this.location = JSON.parse(val);
-        console.log(location);
         if (this.location.geolocation == false) {
-          console.log("geolocation false");
-          this.weatherProv.getWeather(this.location.city, this.location.state, 'br')
+          this.weatherProv.getWeather(this.location.city, this.location.state, 'br', this.lang)
             .subscribe(wea => {
               this.weather = wea;
             },
-              (err) => {
-                console.log(err.error)
+              () => {
                 this.alertLocationNotFound();
               });
         } else {
-          console.log("geolocation true");
           this.location = JSON.parse(val);
-          this.weatherProv.getWeatherGeol(this.location.lat, this.location.log)
+          this.weatherProv.getWeatherGeol(this.location.lat, this.location.log, this.lang)
             .subscribe(wea => {
               this.weather = wea;
             },
-              (err) => {
-                console.log(err.error)
+              () => {
                 this.alertLocationNotFound();
               });
         }
@@ -79,33 +83,33 @@ export class HomePage {
     })
   }
 
-  alertLocationNotFound() {
-    let titleValue: string; 
+  private async alertLocationNotFound() {
+
+    let titleValue: string;
     let erroMessage: string;
 
     this.translateService.get('LOCNOTFOUND').subscribe(
       value => {
         titleValue = value;
+        this.translateService.get('ERROMESSAGE').subscribe(
+          value => {
+            erroMessage = value;
+            let alert = this.alertCtrl.create({
+              title: titleValue,
+              message: erroMessage,
+              buttons: [
+                {
+                  text: 'Ok',
+                  handler: () => {
+                    this.navCtrl.parent.select(1);
+                  }
+                }
+              ]
+            });
+            alert.present();
+          }
+        );
       }
     );
-    this.translateService.get('ERROMESSAGE').subscribe(
-      value => {
-        erroMessage = value;
-      }
-    )
-
-    let alert = this.alertCtrl.create({
-      title: titleValue,
-      message: erroMessage,
-      buttons: [
-        {
-          text: 'Ok',
-          handler: () => {
-            this.navCtrl.parent.select(1);
-          }
-        }
-      ]
-    });
-    alert.present();
   }
 }

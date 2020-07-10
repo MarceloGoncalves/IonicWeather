@@ -17,12 +17,12 @@ export class WeatherApiProvider {
     console.log("WeatherApi");
   }
 
-  getWeather(city, state, country) {
+  getWeather(city, state, country, lang) {
     return this.http.get(this.url+'q='+ city + ',' + state + ',' +
-                           country + '&appid=' + this.key+'&units=metric'+'&lang=pt_br');
+                           country + '&appid=' + this.key+'&units=metric'+'&lang='+lang);
   }
-  getWeatherGeol(lat, lon){
-    return this.http.get(this.url+'lat='+lat+'&lon='+lon+'&appid=' + this.key+'&units=metric'+'&lang=pt_br');
+  getWeatherGeol(lat, lon, lang){
+    return this.http.get(this.url+'lat='+lat+'&lon='+lon+'&appid=' + this.key+'&units=metric'+'&lang='+lang);
   }
 
 }
