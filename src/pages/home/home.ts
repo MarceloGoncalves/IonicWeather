@@ -4,6 +4,7 @@ import { NavController } from 'ionic-angular';
 import { WeatherApiProvider } from '../../providers/weather-api/weather-api';
 import { Storage } from '@ionic/storage';
 import { AlertController } from 'ionic-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'page-home',
@@ -24,11 +25,24 @@ export class HomePage {
     public navCtrl: NavController,
     private weatherProv: WeatherApiProvider,
     private storage: Storage,
-    private alertCtrl: AlertController) {
+    private alertCtrl: AlertController,
+    public translateService:TranslateService) {
   }
 
   ionViewDidEnter() {
     this.getWeather();
+    this.getLinguage();
+  }
+
+  private async getLinguage(){
+    await this.storage.get('language').then((res) =>{
+      if(res != null){
+        this.translateService.setDefaultLang(res);
+      }
+      else{
+        this.translateService.setDefaultLang('br');
+      }
+    })
   }
 
 
@@ -66,14 +80,28 @@ export class HomePage {
   }
 
   alertLocationNotFound() {
+    let titleValue: string; 
+    let erroMessage: string;
+
+    this.translateService.get('LOCNOTFOUND').subscribe(
+      value => {
+        titleValue = value;
+      }
+    );
+    this.translateService.get('ERROMESSAGE').subscribe(
+      value => {
+        erroMessage = value;
+      }
+    )
+
     let alert = this.alertCtrl.create({
-      title: 'Location not found',
-      message: 'plase configure your location',
+      title: titleValue,
+      message: erroMessage,
       buttons: [
         {
           text: 'Ok',
           handler: () => {
-            this.navCtrl.parent.select(2);
+            this.navCtrl.parent.select(1);
           }
         }
       ]

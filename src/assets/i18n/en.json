@@ -1,0 +1,18 @@
+{
+    "HOME":"Home",
+    "ABOUT":"About",
+    "SETTING":"Setting",
+    "HUMIDITY": "Humidity",
+    "LOCATIONBY": "Get my location by",
+    "GEOLOCATION": "Geolocation",
+    "STATE": "State",
+    "CITY": "City",
+    "SEARCH": "Search",
+    "CHANGELAN": "Change Language",
+    "LOCNOTFOUND":"Location not found",
+    "ERROMESSAGE":"plase configure your location",
+    "NAME":"Name",
+    "VERSION":"Version",
+    "DEV":"Developed by Marcelo Gonçalves"
+
+}

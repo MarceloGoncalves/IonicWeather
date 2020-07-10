@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation';
 import { LocationApiProvider } from '../../providers/location-api/location-api';
 import { AlertController } from 'ionic-angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @IonicPage()
 @Component({
@@ -18,6 +19,7 @@ export class SettingPage {
   citys: string[];
   ufs = [];
   state: String;
+  language: string;
 
 
 
@@ -27,9 +29,11 @@ export class SettingPage {
     private storage: Storage,
     public geolocation: Geolocation,
     private locProvider: LocationApiProvider,
-    private alertCtrl: AlertController) {
+    private alertCtrl: AlertController,
+    public translateService: TranslateService) {
 
     this.getUf();
+    this.getLinguage();
   }
 
   getUf() {
@@ -82,7 +86,7 @@ export class SettingPage {
       }
       this.storage.set('location', JSON.stringify(location));
       this.navCtrl.parent.select(0);
-    }else{
+    } else {
 
     }
   }
@@ -99,6 +103,22 @@ export class SettingPage {
     }).catch((error) => {
       console.log('Error getting location', error);
     });
+  }
+
+  changeLanguage() {
+    this.storage.set('language', this.language);
+    this.translateService.setDefaultLang(this.language);
+  }
+
+  private async getLinguage(){
+    await this.storage.get('language').then((res) =>{
+      if(res != null){
+        this.language = res
+      }
+      else{
+        this.language = 'br'
+      }
+    })
   }
 
 }

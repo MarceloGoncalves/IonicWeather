@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Setting</ion-title>
+    <ion-title>{{"SETTING" | translate}}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -8,13 +8,13 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <h3 class="title">Get my location by</h3>
+        <h3 class="title">{{"LOCATIONBY" | translate}}</h3>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
         <button ion-button block (click)="getGeolocation()">
-          Geolocation
+          {{"GEOLOCATION"|translate}}
         </button>
       </ion-col>
     </ion-row>
@@ -23,23 +23,44 @@
         <ion-list>
           <form (ngSubmit)="saveForm()">
             <ion-item>
-              <ion-label>State: </ion-label>
+              <ion-label>{{"STATE"|translate }}: </ion-label>
               <ion-select [(ngModel)]="state" [ngModelOptions]="{standalone: true}" (ngModelChange)="selectChange()">
                 <ion-option *ngFor="let item of ufs" value="{{item.sigla}}">{{item.nome}}</ion-option>
               </ion-select>
             </ion-item>
             <ion-item *ngIf="citys">
-              <ion-label>City: </ion-label>
+              <ion-label>{{"CITY"|translate}}: </ion-label>
               <ion-select [(ngModel)]="city" [ngModelOptions]="{standalone: true}">
                 <ion-option *ngFor="let item of citys" value="{{item.nome}}">{{item.nome}}</ion-option>
               </ion-select>
             </ion-item>
-            <button type='submit' ion-button block>Search</button>
+            <button type='submit' ion-button block>{{"SEARCH"|translate }}</button>
           </form>
-
         </ion-list>
       </ion-col>
     </ion-row>
+    <ion-row>
+      <ion-col>
+        <h3 class="title">{{"CHANGELAN"|translate}} </h3>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-list radio-group block [(ngModel)]="language" (ngModelChange)="changeLanguage()">
+          <ion-item>
+            <ion-label>English</ion-label>
+            <ion-radio value="en"></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>Protuguês Brasil</ion-label>
+            <ion-radio value="br"></ion-radio>
+          </ion-item>
+        </ion-list>
+
+      </ion-col>
+
+    </ion-row>
+
   </ion-grid>
 
 </ion-content>

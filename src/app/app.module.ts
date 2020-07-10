@@ -13,12 +13,20 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { WeatherApiProvider } from '../providers/weather-api/weather-api';
 
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation';
-import { GeolocationMock} from '../mock/geolocation.mock';
+import { GeolocationMock } from '../mock/geolocation.mock';
 import { LocationApiProvider } from '../providers/location-api/location-api';
 import { DescriptionPipe } from '../pipes/description/description';
+
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 
 
@@ -35,7 +43,14 @@ import { DescriptionPipe } from '../pipes/description/description';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (createTranslateLoader),
+        deps: [HttpClient]
+      }
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -48,12 +63,12 @@ import { DescriptionPipe } from '../pipes/description/description';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
     WeatherApiProvider,
-  //  Geolocation,
-   {provide: Geolocation, useClass: GeolocationMock},
+    //  Geolocation,
+    { provide: Geolocation, useClass: GeolocationMock },
     LocationApiProvider
 
   ]
 })
-export class AppModule {}
+export class AppModule { }

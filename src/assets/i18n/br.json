@@ -1,0 +1,17 @@
+{
+    "HOME":"Início",
+    "ABOUT":"Sobre",
+    "SETTING":"Configurações",
+    "HUMIDITY": "Humidade",
+    "LOCATIONBY": "Obter localização por",
+    "GEOLOCATION": "Geolocalização",
+    "STATE": "Estado",
+    "CITY": "Cidade",
+    "SEARCH": "Procurar",
+    "CHANGELAN": "Mudar idioma",
+    "LOCNOTFOUND":"Localização não encontrada",
+    "ERROMESSAGE":"Por favor configure sua localização",
+    "NAME":"Nome",
+    "VERSION":"Versão",
+    "DEV":"Desenvolvido por Marcelo Gonçalves"
+}
