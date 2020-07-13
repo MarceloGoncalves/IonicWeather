@@ -5,6 +5,10 @@ import { WeatherApiProvider } from '../../providers/weather-api/weather-api';
 import { Storage } from '@ionic/storage';
 import { AlertController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
+import { WeatherModel } from '../../model/watherReq.model';
+import { UvReqModel } from '../../model/uvReq.model';
+import { LocalNotifications } from '@ionic-native/local-notifications';
+
 
 @Component({
   selector: 'page-home',
@@ -19,6 +23,7 @@ export class HomePage {
     log: String,
     geolocation: boolean
   }
+  uvIndex: number;
 
   private lang: string;
 
@@ -28,7 +33,8 @@ export class HomePage {
     private weatherProv: WeatherApiProvider,
     private storage: Storage,
     private alertCtrl: AlertController,
-    public translateService: TranslateService) {
+    public translateService: TranslateService,
+    private locNot: LocalNotifications) {
   }
 
 
@@ -38,9 +44,18 @@ export class HomePage {
     this.getWeather();
   }
 
+  private setNotification() {
+    if (this.uvIndex > 5) {
+      this.locNot.schedule({
+        title: 'UV Index',
+        text: 'Use protetor solar',
+        foreground: true
+      });
+    }
+  }
+
   private async getLanguage() {
     await this.storage.get('language').then((res) => {
-      console.log(res)
       if (res != null) {
         this.translateService.setDefaultLang(res);
         (res == 'br') ? this.lang = 'pt_br' : this.lang = 'en';
@@ -53,16 +68,31 @@ export class HomePage {
 
   }
 
+  buttonChip() {
+    console.log('chip');
+  }
+
+  getUV(lat, lon) {
+    this.weatherProv.getUv(lat, lon).subscribe(
+      (uv: UvReqModel) => {
+        console.log(uv.value);
+        this.uvIndex = Math.floor(Number(uv.value));
+        this.setNotification();
+      }
+    );
+
+  }
+
 
   private async getWeather() {
-    this.getLanguage();
     await this.storage.get('location').then((val) => {
       if (val != null) {
         this.location = JSON.parse(val);
         if (this.location.geolocation == false) {
           this.weatherProv.getWeather(this.location.city, this.location.state, 'br', this.lang)
-            .subscribe(wea => {
+            .subscribe((wea: WeatherModel) => {
               this.weather = wea;
+              this.getUV(wea.coord.lat, wea.coord.lon)
             },
               () => {
                 this.alertLocationNotFound();
@@ -70,8 +100,9 @@ export class HomePage {
         } else {
           this.location = JSON.parse(val);
           this.weatherProv.getWeatherGeol(this.location.lat, this.location.log, this.lang)
-            .subscribe(wea => {
+            .subscribe((wea: WeatherModel) => {
               this.weather = wea;
+              this.getUV(wea.coord.lat, wea.coord.lon)
             },
               () => {
                 this.alertLocationNotFound();
@@ -112,4 +143,85 @@ export class HomePage {
       }
     );
   }
+
+  uvInfo() {
+    let title: any;
+    let message: string;
+    if (this.uvIndex < 3) {
+      this.translateService.get('UVLOW').subscribe(
+        res => {
+          title = res;
+          this.translateService.get('UVLOWMES').subscribe(
+            mes => {
+              message = mes
+              this.createAlert(title, message);
+            }
+          )
+        }
+      )
+    } if (this.uvIndex < 6 && this.uvIndex > 2) {
+      this.translateService.get('UVMOD').subscribe(
+        res => {
+          title = res;
+          this.translateService.get('UVMODMES').subscribe(
+            mes => {
+              message = mes
+              this.createAlert(title, message);
+            }
+          )
+        }
+      )
+    }
+    if (this.uvIndex < 8 && this.uvIndex > 5) {
+      this.translateService.get('UVHIG').subscribe(
+        res => {
+          title = res;
+          this.translateService.get('UVHIGMES').subscribe(
+            mes => {
+              message = mes
+              this.createAlert(title, message);
+            }
+          )
+        }
+      )
+
+    }
+    if (this.uvIndex < 11 && this.uvIndex > 7) {
+      this.translateService.get('UVVHI').subscribe(
+        res => {
+          title = res;
+          this.translateService.get('UVVHIMES').subscribe(
+            mes => {
+              message = mes
+              this.createAlert(title, message);
+            }
+          )
+        }
+      )
+    }
+    if (this.uvIndex > 10) {
+      this.translateService.get('UVEXT').subscribe(
+        res => {
+          title = res;
+          this.translateService.get('UVEXTMES').subscribe(
+            mes => {
+              message = mes
+              this.createAlert(title, message);
+            }
+          )
+        }
+      )
+
+    }
+  }
+
+  private createAlert(title, message) {
+    let alert = this.alertCtrl.create({
+      title: title,
+      message: message,
+      buttons: ['Ok']
+    });
+    alert.present();
+  }
+
 }

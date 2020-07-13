@@ -39,7 +39,15 @@ $colors: (
   danger:     #f53d3d,
   light:      #ffffff,
   dark:       #222,
+
+  uvLow:      rgb(48, 134, 48),
+  uvModerate: rgb(167, 167, 41),
+  uvHigh:     rgb(175, 130, 45),
+  uvVaryHigh: rgb(175, 64, 45),
+  uvExtreme:  rgb(153, 45, 175),
+  
 );
+$chip-md-font-size: 15px;
 
 //Top Toolbar
 $toolbar-md-background: color($colors, secondary);
@@ -50,6 +58,8 @@ $toolbar-md-height: 30px;
 $tabs-md-background: color($colors, secondary);
 $tabs-md-tab-color-active: color($colors, light);
 $tabs-md-tab-text-color: color($colors, light);
+$button-md-text-transform: none;
+$button-md-font-weight: normal;
 
 //list
 $list-md-background-color: color($colors, secondary);

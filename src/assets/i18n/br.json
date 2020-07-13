@@ -1,7 +1,7 @@
 {
-    "HOME":"Início",
-    "ABOUT":"Sobre",
-    "SETTING":"Configurações",
+    "HOME": "Início",
+    "ABOUT": "Sobre",
+    "SETTING": "Configurações",
     "HUMIDITY": "Humidade",
     "LOCATIONBY": "Obter localização por",
     "GEOLOCATION": "Geolocalização",
@@ -9,9 +9,25 @@
     "CITY": "Cidade",
     "SEARCH": "Procurar",
     "CHANGELAN": "Mudar idioma",
-    "LOCNOTFOUND":"Localização não encontrada",
-    "ERROMESSAGE":"Por favor configure sua localização",
-    "NAME":"Nome",
-    "VERSION":"Versão",
-    "DEV":"Desenvolvido por Marcelo Gonçalves"
+    "LOCNOTFOUND": "Localização não encontrada",
+    "ERROMESSAGE": "Por favor configure sua localização",
+    "NAME": "Nome",
+    "VERSION": "Versão",
+    "DEV": "Desenvolvido por Marcelo Gonçalves",
+    "UVINDEX": "Índice de Ultravioleta",
+    
+    "UVLOW": "Baixo",
+    "UVLOWMES":"Uma leitura do índice de UV de 0 a 2 significa baixo risco dos raios UV do Sol para uma pessoa comum. Use óculos escuros em dias claros. Se você queima facilmente, cubra e use protetor solar de amplo espectro SPF 30+. ",
+    
+    "UVMOD": "Moderado",
+    "UVMODMES":"Uma leitura do índice de UV de 3 a 5 significa risco moderado de danos devido à exposição solar desprotegida. Fique na sombra perto do meio-dia quando o sol estiver mais forte. Se estiver ao ar livre, use roupas de proteção solar, um chapéu de abas largas e óculos de sol com proteção UV. Aplique generosamente protetor solar de amplo espectro SPF 30+ a cada 1,5 horas, mesmo em dias nublados e após nadar ou suar. ",
+    
+    "UVHIG": "Elevado",
+    "UVHIGMES":"Uma leitura do índice de UV de 6 a 7 significa alto risco de danos devido à exposição solar desprotegida. É necessária proteção contra danos à pele e aos olhos. Reduza o tempo ao sol entre as 10h e as 16h. Se estiver ao ar livre, procure sombra e use roupas de proteção solar, um chapéu de abas largas e óculos de sol com proteção UV. Aplique generosamente protetor solar de amplo espectro SPF 30+ a cada 1,5 horas, mesmo em dias nublados e após nadar ou suar.",
+    
+    "UVVHI": "Muito Elevado",
+    "UVVHIMES":"Uma leitura do índice de UV de 8 a 10 significa risco muito alto de danos devido à exposição solar desprotegida.\nTome precauções extras, pois a pele e os olhos desprotegidos serão danificados e poderão queimar rapidamente.\nMinimize a exposição ao sol entre as 10h e as 16h Se estiver ao ar livre, procure sombra e use roupas de proteção solar, um chapéu de abas largas e óculos de sol com proteção UV.\nAplique generosamente protetor solar de amplo espectro SPF 30+ a cada 1,5 horas, mesmo em dias nublados e após nadar ou suar.",
+    
+    "UVEXT": "Extremo",
+    "UVEXTMES":"Uma leitura do índice UV de 11 ou mais significa risco extremo de danos devido à exposição solar desprotegida. Tome todas as precauções, pois a pele e os olhos desprotegidos podem queimar em minutos. Tente evitar a exposição ao sol entre as 10h e as 16h. Se estiver ao ar livre, procure sombra e use roupas de proteção solar, um chapéu de abas largas e óculos de sol com proteção UV. Aplique generosamente protetor solar de amplo espectro SPF 30+ a cada 1,5 horas, mesmo em dias nublados e após nadar ou suar."
 }

@@ -13,11 +13,46 @@
       <ion-col>
         <h2 class="location">{{weather.name}}</h2>
         <div class="icon"><img src="http://openweathermap.org/img/w/{{weather.weather[0].icon}}.png"></div>
-        <h3 class="desc">{{weather.weather[0].description | description}} </h3>
+        <h3 class="desc">{{weather.weather[0].description | description}}</h3>
         <h1 class="temp">{{weather.main.temp}}&deg;</h1>
       </ion-col>
     </ion-row>
     <ion-row>
+      <ion-col>
+        <div class="dropIcon">
+          <img src='../../assets/icon/humidade.png'> {{weather.main.humidity}}%
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="uvIcon">
+          <img src='../../assets/icon/uv.png'> {{uvIndex}}
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="uvIndex">
+          <button ion-button round *ngIf="uvIndex < 3" (click)="uvInfo()" color="uvLow">
+            {{"UVINDEX"|translate}}: {{"UVLOW"|translate}}
+          </button>
+          <button ion-button round *ngIf="uvIndex < 6 && uvIndex > 2" (click)="uvInfo()" color="uvModerate">
+            {{"UVINDEX"|translate}}: {{"UVMOD"|translate}}
+          </button>
+          <button ion-button round *ngIf="uvIndex < 8 && uvIndex > 5" (click)="uvInfo()" color="uvHigh">
+            {{"UVINDEX"|translate}}: {{"UVHIG"|translate}}
+          </button>
+          <button ion-button round *ngIf="uvIndex < 11 && uvIndex > 7" (click)="uvInfo()" color="uvVaryHigh">
+            {{"UVINDEX"|translate}}: {{"UVVHI"|translate}}
+          </button>
+          <button ion-button round *ngIf="uvIndex > 10" (click)="uvInfo()" color="uvExtreme">
+            {{"UVINDEX"|translate}}: {{"UVEXT"|translate}}
+          </button>
+        </div>
+      </ion-col>
+    </ion-row>
+    <!--  <ion-row>
       <ion-col>
         <ion-list>
           <ion-item>
@@ -31,6 +66,6 @@
           </ion-item>
         </ion-list>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
   </ion-grid>
 </ion-content>

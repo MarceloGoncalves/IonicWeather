@@ -16,12 +16,13 @@ import { WeatherApiProvider } from '../providers/weather-api/weather-api';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation';
-import { GeolocationMock } from '../mock/geolocation.mock';
+//import { GeolocationMock } from '../mock/geolocation.mock';
 import { LocationApiProvider } from '../providers/location-api/location-api';
 import { DescriptionPipe } from '../pipes/description/description';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -37,7 +38,9 @@ export function createTranslateLoader(http: HttpClient) {
     SettingPage,
     HomePage,
     TabsPage,
-    DescriptionPipe
+    DescriptionPipe,
+    
+    
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,7 @@ export function createTranslateLoader(http: HttpClient) {
         useFactory: (createTranslateLoader),
         deps: [HttpClient]
       }
-    })
+    }),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -65,10 +68,10 @@ export function createTranslateLoader(http: HttpClient) {
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     WeatherApiProvider,
-    //  Geolocation,
-    { provide: Geolocation, useClass: GeolocationMock },
-    LocationApiProvider
-
+    Geolocation,
+   // { provide: Geolocation, useClass: GeolocationMock },
+    LocationApiProvider,
+    LocalNotifications
   ]
 })
 export class AppModule { }
