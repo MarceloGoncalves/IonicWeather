@@ -14,6 +14,10 @@
     "NAME": "Nome",
     "VERSION": "Versão",
     "DEV": "Desenvolvido por Marcelo Gonçalves",
+
+    "TITLENOTI":"Alerta Ultravioleta",
+    "TEXTNOTI":"Níveis elevados de raios UV, use protetor solar.",
+
     "UVINDEX": "Índice de Ultravioleta",
     
     "UVLOW": "Baixo",

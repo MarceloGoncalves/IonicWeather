@@ -14,6 +14,10 @@
     "NAME": "Name",
     "VERSION": "Version",
     "DEV": "Developed by Marcelo Gonçalves",
+    
+    "TITLENOTI":"Ultraviolet Alert",
+    "TEXTNOTI":"High levels of UV rays, use sunscreen.",
+    
     "UVINDEX": "Ultraviolet index",
     
     "UVLOW": "Low",

@@ -10,7 +10,6 @@ import { UvReqModel } from '../../model/uvReq.model';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { UvProvider } from '../../providers/uv/uv';
 
-
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -40,7 +39,6 @@ export class HomePage {
   }
 
 
-
   ionViewDidEnter() {
     this.getLanguage();
     this.getWeather();
@@ -50,12 +48,21 @@ export class HomePage {
     if (this.uvIndex > 5) {
       this.locNot.isPresent(1).then((res: boolean) => {
         if (!res) {
-          this.locNot.schedule({
-            id: 1,
-            title: 'UV Index',
-            text: 'Use protetor solar',
-            foreground: true
-          });
+          this.translateService.get('TITLENOTI').subscribe(
+            title => {
+              this.translateService.get('TEXTNOTI').subscribe(
+                text => {
+                  this.locNot.schedule({
+                    id: 1,
+                    title: title,
+                    text: text,
+                    smallIcon: '../../assets/icon/uv.png',
+                    foreground: true
+                  });
+                }
+              )
+            }
+          )
         }
       })
     }
@@ -77,7 +84,6 @@ export class HomePage {
   getUV(lat, lon) {
     this.uvProv.getUvIndex(lat, lon).subscribe(
       (uv: UvReqModel) => {
-        console.log(uv);
         this.uvIndex = Math.floor(Number(uv.data[0].uv));
         this.setNotification();
       }

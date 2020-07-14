@@ -26,14 +26,14 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <div class="uvIcon" *ngIf="uvIndex">
+        <div class="uvIcon" *ngIf="uvIndex != null">
           <img src='../../assets/icon/uv.png'> {{uvIndex}}
         </div>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <div class="uvIndex" *ngIf="uvIndex">
+        <div class="uvIndex" *ngIf="uvIndex != null">
           <button ion-button round *ngIf="uvIndex < 3" (click)="uvInfo()" color="uvLow">
             {{"UVINDEX"|translate}}: {{"UVLOW"|translate}}
           </button>

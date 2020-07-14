@@ -26,6 +26,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
 import { UvProvider } from '../providers/uv/uv';
 
 
+
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -73,7 +74,7 @@ export function createTranslateLoader(http: HttpClient) {
    // { provide: Geolocation, useClass: GeolocationMock },
     LocationApiProvider,
     LocalNotifications,
-    UvProvider
+    UvProvider,
   ]
 })
 export class AppModule { }
