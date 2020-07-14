@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { WeatherModel } from '../../model/watherReq.model';
 import { UvReqModel } from '../../model/uvReq.model';
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { UvProvider } from '../../providers/uv/uv';
 
 
 @Component({
@@ -34,7 +35,8 @@ export class HomePage {
     private storage: Storage,
     private alertCtrl: AlertController,
     public translateService: TranslateService,
-    private locNot: LocalNotifications) {
+    private locNot: LocalNotifications,
+    private uvProv: UvProvider) {
   }
 
 
@@ -73,10 +75,10 @@ export class HomePage {
   }
 
   getUV(lat, lon) {
-    this.weatherProv.getUv(lat, lon).subscribe(
+    this.uvProv.getUvIndex(lat, lon).subscribe(
       (uv: UvReqModel) => {
-        console.log(uv.value);
-        this.uvIndex = Math.floor(Number(uv.value));
+        console.log(uv);
+        this.uvIndex = Math.floor(Number(uv.data[0].uv));
         this.setNotification();
       }
     );

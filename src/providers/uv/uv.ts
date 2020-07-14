@@ -1,26 +1,20 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+import { keyUvApi } from '../../key/apiKey';
 
 @Injectable()
 export class UvProvider {
 
-  url: string;
-  headers: HttpHeaders;
+  private url: string;
+  private key = keyUvApi;
 
   constructor(public http: HttpClient) {
-    this.url = 'https://api.openuv.io/api/v1/uv';
-    this.headers = new HttpHeaders().append('x-access-token','dc59477761d044942b8ff23d7d9775ea');
+    this.url = 'https://api.weatherbit.io/v2.0/current';
   }
 
   getUvIndex(lat: String, lng: String) {
-    const requestOptions = {                                                                                                                                                                                 
-      headers: this.headers 
-    };
-    let date = new Date().toISOString();
-    console.log(this.headers.keys());
-    return this.http.get(this.url + '?lat=' + lat + '&lng=' + lng + '&dt=' + date, requestOptions);
+    return this.http.get(this.url + '?lat=' + lat + '&lon=' + lng + '&key=' + this.key);
   }
-
 
 }
