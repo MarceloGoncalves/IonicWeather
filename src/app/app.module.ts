@@ -23,6 +23,7 @@ import { DescriptionPipe } from '../pipes/description/description';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { UvProvider } from '../providers/uv/uv';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -71,7 +72,8 @@ export function createTranslateLoader(http: HttpClient) {
     Geolocation,
    // { provide: Geolocation, useClass: GeolocationMock },
     LocationApiProvider,
-    LocalNotifications
+    LocalNotifications,
+    UvProvider
   ]
 })
 export class AppModule { }
