@@ -26,14 +26,14 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <div class="uvIcon">
+        <div class="uvIcon" *ngIf="uvIndex">
           <img src='../../assets/icon/uv.png'> {{uvIndex}}
         </div>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <div class="uvIndex">
+        <div class="uvIndex" *ngIf="uvIndex">
           <button ion-button round *ngIf="uvIndex < 3" (click)="uvInfo()" color="uvLow">
             {{"UVINDEX"|translate}}: {{"UVLOW"|translate}}
           </button>
@@ -52,20 +52,5 @@
         </div>
       </ion-col>
     </ion-row>
-    <!--  <ion-row>
-      <ion-col>
-        <ion-list>
-          <ion-item>
-            <strong>Max: </strong> {{weather.main.temp_max}}&deg;
-          </ion-item>
-          <ion-item>
-            <strong>Min: </strong> {{weather.main.temp_min}}&deg;
-          </ion-item>
-          <ion-item>
-            <strong>{{"HUMIDITY"| translate}}: </strong> {{weather.main.humidity}}%
-          </ion-item>
-        </ion-list>
-      </ion-col>
-    </ion-row> -->
   </ion-grid>
 </ion-content>

@@ -16,5 +16,4 @@ export class UvProvider {
   getUvIndex(lat: String, lng: String) {
     return this.http.get(this.url + '?lat=' + lat + '&lon=' + lng + '&key=' + this.key);
   }
-
 }

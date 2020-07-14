@@ -48,11 +48,16 @@ export class HomePage {
 
   private setNotification() {
     if (this.uvIndex > 5) {
-      this.locNot.schedule({
-        title: 'UV Index',
-        text: 'Use protetor solar',
-        foreground: true
-      });
+      this.locNot.isPresent(1).then((res: boolean) => {
+        if (!res) {
+          this.locNot.schedule({
+            id: 1,
+            title: 'UV Index',
+            text: 'Use protetor solar',
+            foreground: true
+          });
+        }
+      })
     }
   }
 
@@ -67,11 +72,6 @@ export class HomePage {
         this.lang = 'pt_br';
       }
     })
-
-  }
-
-  buttonChip() {
-    console.log('chip');
   }
 
   getUV(lat, lon) {
