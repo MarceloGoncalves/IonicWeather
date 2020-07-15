@@ -44,10 +44,10 @@ export class HomePage {
     this.getWeather();
   }
 
-  private setNotification() {
+  private async setNotification() {
     if (this.uvIndex > 5) {
-      this.locNot.isPresent(1).then((res: boolean) => {
-        if (!res) {
+      await this.locNot.isPresent(1).then((res: boolean) => {
+        if (res == false) {
           this.translateService.get('TITLENOTI').subscribe(
             title => {
               this.translateService.get('TEXTNOTI').subscribe(
@@ -64,6 +64,8 @@ export class HomePage {
             }
           )
         }
+      }).catch(error => {
+        console.error(error);
       })
     }
   }
@@ -119,6 +121,8 @@ export class HomePage {
       } else {
         this.alertLocationNotFound();
       }
+    }).catch(erro => {
+      console.log(erro);
     })
   }
 
